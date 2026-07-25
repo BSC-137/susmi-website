@@ -1,12 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import MercuryField from "../components/MercuryField.astro";
 import { site } from "../data/site";
 ---
 
 <BaseLayout>
-  <!-- Hero shell: first viewport reserved for brand composition (no cards / secondary content). -->
   <main>
     <section class="hero-shell" aria-label="Hero">
+      <MercuryField intensity="hero" />
       <div class="section-shell hero-shell__inner">
         <h1 class="hero-shell__brand mercury-text">{site.name}</h1>
         <p class="hero-shell__support">{site.fullName}</p>
@@ -17,12 +18,16 @@ import { site } from "../data/site";
 
 <style>
   .hero-shell {
+    position: relative;
     min-height: calc(100dvh - 4rem);
     display: flex;
     align-items: center;
+    overflow: hidden;
   }
 
   .hero-shell__inner {
+    position: relative;
+    z-index: 2;
     padding-block: clamp(3rem, 8vw, 5rem);
   }
 
@@ -37,6 +42,7 @@ import { site } from "../data/site";
     margin: 1rem 0 0;
     max-width: 28rem;
     font-size: 1.0625rem;
-    color: var(--text-muted);
+    color: var(--mercury-bright);
+    text-shadow: 0 1px 18px rgba(5, 5, 5, 0.65);
   }
 </style>
