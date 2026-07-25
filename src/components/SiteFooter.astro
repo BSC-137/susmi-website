@@ -1,0 +1,23 @@
+---
+import { site } from "../data/site";
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__mission">{site.mission}</p>
+
+    <div class="site-footer__social">
+      <a href={site.social.instagram} rel="noopener noreferrer" target="_blank">Instagram</a>
+      <a href={site.social.discord} rel="noopener noreferrer" target="_blank">Discord</a>
+      <a href={`mailto:${site.social.email}`}>Email</a>
+    </div>
+
+    <div class="site-footer__meta">
+      <p>
+        {site.name} is a student society at the University of Sydney and is not an official
+        university publication.
+      </p>
+      <p>© 2026 {site.fullName}</p>
+    </div>
+  </div>
+</footer>

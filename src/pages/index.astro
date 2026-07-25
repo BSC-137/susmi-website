@@ -4,10 +4,39 @@ import { site } from "../data/site";
 ---
 
 <BaseLayout>
+  <!-- Hero shell: first viewport reserved for brand composition (no cards / secondary content). -->
   <main>
-    <h1>{site.name}</h1>
-    <p>{site.fullName}</p>
-    <p>{site.mission}</p>
-    <p>{site.semester}</p>
+    <section class="hero-shell" aria-label="Hero">
+      <div class="section-shell hero-shell__inner">
+        <h1 class="hero-shell__brand mercury-text">{site.name}</h1>
+        <p class="hero-shell__support">{site.fullName}</p>
+      </div>
+    </section>
   </main>
 </BaseLayout>
+
+<style>
+  .hero-shell {
+    min-height: calc(100dvh - 4rem);
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-shell__inner {
+    padding-block: clamp(3rem, 8vw, 5rem);
+  }
+
+  .hero-shell__brand {
+    margin: 0;
+    font-size: clamp(4.5rem, 16vw, 9rem);
+    letter-spacing: -0.06em;
+    line-height: 0.9;
+  }
+
+  .hero-shell__support {
+    margin: 1rem 0 0;
+    max-width: 28rem;
+    font-size: 1.0625rem;
+    color: var(--text-muted);
+  }
+</style>

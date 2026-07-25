@@ -1,24 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../data/site";
-import events from "../data/events.json";
 ---
 
 <BaseLayout title={`Events — ${site.name}`} description={`${site.semester} events from ${site.fullName}.`}>
   <main>
-    <h1>Events</h1>
-    <p>{site.semester}</p>
-    <ul>
-      {
-        events.map((event) => (
-          <li>
-            <strong>{event.title}</strong>
-            <span>
-              {event.date} · {event.time} · {event.location} · {event.type}
-            </span>
-          </li>
-        ))
-      }
-    </ul>
+    <section class="section-shell">
+      <h1>Events</h1>
+      <p>{site.semester} — talks, workshops, and community nights.</p>
+    </section>
   </main>
 </BaseLayout>
