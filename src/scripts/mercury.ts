@@ -261,6 +261,7 @@ export function mountMercuryField(
   let targetX = 0.5;
   let targetY = 0.5;
   let pointerActive = 0;
+  let resizeTimer = 0;
 
   const host = root ?? canvas.parentElement ?? canvas;
 
@@ -271,13 +272,41 @@ export function mountMercuryField(
     frameStride = intensity === "hero" ? (narrow ? 2 : 1) : 2;
   };
 
-  const resize = () => {
+  const draw = (now: number) => {
+    mouseX += (targetX - mouseX) * 0.045;
+    mouseY += (targetY - mouseY) * 0.045;
+
+    const t = (elapsedAtPause + (now - runningSince)) / 1000;
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.uniform1f(uTime, t);
+    gl.uniform2f(uMouse, mouseX, mouseY);
+    gl.uniform1f(uIntensity, intensityValue);
+    gl.uniform1f(uPointer, touch ? 0 : pointerActive);
+    gl.clearColor(0, 0, 0, 0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  };
+
+  const resizeNow = () => {
+    if (destroyed) return;
     applyPerfProfile();
     const rect = host.getBoundingClientRect();
     const nextW = Math.max(1, Math.floor(rect.width));
     const nextH = Math.max(1, Math.floor(rect.height));
     const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
-    if (nextW === width && nextH === height && canvas.width === Math.floor(nextW * dpr)) return;
+
+    const widthChanged = nextW !== width;
+    const heightDelta = Math.abs(nextH - height);
+
+    // Touch: ignore URL-bar height jitter (height-only changes under ~100px).
+    if (touch && width > 0 && height > 0 && !widthChanged && heightDelta > 0 && heightDelta < 100) {
+      return;
+    }
+
+    if (nextW === width && nextH === height && canvas.width === Math.floor(nextW * dpr)) {
+      return;
+    }
+
     width = nextW;
     height = nextH;
     canvas.width = Math.floor(nextW * dpr);
@@ -285,6 +314,17 @@ export function mountMercuryField(
     canvas.style.width = `${nextW}px`;
     canvas.style.height = `${nextH}px`;
     gl.viewport(0, 0, canvas.width, canvas.height);
+
+    // Redraw immediately after buffer reset — don't wait for frameStride.
+    draw(performance.now());
+  };
+
+  const scheduleResize = () => {
+    if (resizeTimer) window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      resizeTimer = 0;
+      resizeNow();
+    }, 120);
   };
 
   const onPointerMove = (event: PointerEvent) => {
@@ -329,21 +369,6 @@ export function mountMercuryField(
     else resume();
   };
 
-  const draw = (now: number) => {
-    mouseX += (targetX - mouseX) * 0.045;
-    mouseY += (targetY - mouseY) * 0.045;
-
-    const t = (elapsedAtPause + (now - runningSince)) / 1000;
-    gl.uniform2f(uRes, canvas.width, canvas.height);
-    gl.uniform1f(uTime, t);
-    gl.uniform2f(uMouse, mouseX, mouseY);
-    gl.uniform1f(uIntensity, intensityValue);
-    gl.uniform1f(uPointer, touch ? 0 : pointerActive);
-    gl.clearColor(0, 0, 0, 0);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
-  };
-
   const loop = () => {
     if (!running || destroyed) return;
     raf = requestAnimationFrame((now) => {
@@ -353,9 +378,9 @@ export function mountMercuryField(
     });
   };
 
-  const observer = new ResizeObserver(() => resize());
+  const observer = new ResizeObserver(() => scheduleResize());
   observer.observe(host);
-  resize();
+  resizeNow();
 
   if (!touch) {
     window.addEventListener("pointermove", onPointerMove, { passive: true });
@@ -374,6 +399,7 @@ export function mountMercuryField(
       if (destroyed) return;
       destroyed = true;
       pause();
+      if (resizeTimer) window.clearTimeout(resizeTimer);
       observer.disconnect();
       if (!touch) {
         window.removeEventListener("pointermove", onPointerMove);

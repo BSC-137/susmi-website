@@ -47,21 +47,10 @@ const { intensity = "hero", class: className = "" } = Astro.props;
     height: 100%;
   }
 
-  .mercury-field__canvas {
-    z-index: 0;
-    display: block;
-  }
-
-  .mercury-field__veil {
-    z-index: 1;
-    background:
-      linear-gradient(180deg, rgba(5, 5, 5, 0.72) 0%, rgba(5, 5, 5, 0.18) 45%, rgba(5, 5, 5, 0.48) 100%),
-      radial-gradient(ellipse 80% 65% at 50% 45%, transparent 15%, rgba(5, 5, 5, 0.42) 100%);
-  }
-
+  /* Fallback always under canvas — covers any WebGL clear/gap (no black hole flash). */
   .mercury-field__fallback {
     z-index: 0;
-    opacity: 0;
+    opacity: 1;
     background:
       radial-gradient(ellipse 55% 40% at 35% 45%, rgba(200, 204, 210, 0.22), transparent 60%),
       radial-gradient(ellipse 50% 38% at 68% 55%, rgba(232, 234, 237, 0.14), transparent 58%),
@@ -69,12 +58,20 @@ const { intensity = "hero", class: className = "" } = Astro.props;
       linear-gradient(180deg, #050505, #0a0a0a);
   }
 
-  .mercury-field.is-static .mercury-field__canvas {
-    display: none;
+  .mercury-field__canvas {
+    z-index: 1;
+    display: block;
   }
 
-  .mercury-field.is-static .mercury-field__fallback {
-    opacity: 1;
+  .mercury-field__veil {
+    z-index: 2;
+    background:
+      linear-gradient(180deg, rgba(5, 5, 5, 0.72) 0%, rgba(5, 5, 5, 0.18) 45%, rgba(5, 5, 5, 0.48) 100%),
+      radial-gradient(ellipse 80% 65% at 50% 45%, transparent 15%, rgba(5, 5, 5, 0.42) 100%);
+  }
+
+  .mercury-field.is-static .mercury-field__canvas {
+    visibility: hidden;
   }
 
   .mercury-field--subtle .mercury-field__veil {

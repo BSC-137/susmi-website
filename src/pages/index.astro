@@ -108,10 +108,18 @@ function formatEventDate(iso: string) {
 <style>
   .hero {
     position: relative;
-    min-height: calc(100dvh - 4rem);
+    /* 100svh: stable against mobile URL-bar show/hide (avoids mercury canvas resize flash) */
+    min-height: calc(100vh - 4rem);
+    min-height: calc(100svh - 4rem);
     display: flex;
     align-items: flex-end;
     overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      min-height: calc(100dvh - 4rem);
+    }
   }
 
   .hero__inner {
