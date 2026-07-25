@@ -241,9 +241,11 @@ export function mountMercuryField(
   gl.enable(gl.BLEND);
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-  const intensityValue = intensity === "hero" ? 1 : 0.48;
-  const maxDpr = intensity === "hero" ? 1.5 : 1.15;
-  const frameStride = intensity === "hero" ? 1 : 2;
+  const isNarrow = () => window.matchMedia("(max-width: 767px)").matches;
+  const heroOnMobile = intensity === "hero" && isNarrow();
+  let intensityValue = intensity === "hero" ? (heroOnMobile ? 0.62 : 1) : 0.48;
+  let maxDpr = intensity === "hero" ? (heroOnMobile ? 1.15 : 1.5) : 1.15;
+  let frameStride = intensity === "hero" ? (heroOnMobile ? 2 : 1) : 2;
   const touch = isTouchPreferred();
 
   let width = 0;
@@ -262,7 +264,15 @@ export function mountMercuryField(
 
   const host = root ?? canvas.parentElement ?? canvas;
 
+  const applyPerfProfile = () => {
+    const narrow = intensity === "hero" && isNarrow();
+    intensityValue = intensity === "hero" ? (narrow ? 0.62 : 1) : 0.48;
+    maxDpr = intensity === "hero" ? (narrow ? 1.15 : 1.5) : 1.15;
+    frameStride = intensity === "hero" ? (narrow ? 2 : 1) : 2;
+  };
+
   const resize = () => {
+    applyPerfProfile();
     const rect = host.getBoundingClientRect();
     const nextW = Math.max(1, Math.floor(rect.width));
     const nextH = Math.max(1, Math.floor(rect.height));
