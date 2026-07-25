@@ -6,6 +6,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
 const links = [
   { href: "/", label: "Home" },
   { href: "/events", label: "Events" },
+  { href: "/team", label: "Team" },
   { href: "/about", label: "About" },
 ] as const;
 
@@ -36,7 +37,7 @@ function isActive(href: string) {
     </nav>
 
     <div class="site-header__actions">
-      <a class="btn btn-primary" href={site.social.discord}>Join</a>
+      <a class="btn btn-primary" href={site.social.usu} rel="noopener noreferrer" target="_blank">Join</a>
       <button
         class="site-header__menu-btn"
         type="button"

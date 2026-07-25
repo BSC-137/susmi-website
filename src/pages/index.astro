@@ -46,7 +46,7 @@ function formatEventDate(iso: string) {
         </p>
         <div class="hero__ctas reveal" style="--d: 320ms">
           <a class="btn btn-primary" href="/events">See events</a>
-          <a class="btn btn-secondary" href="/about#team">Meet the execs</a>
+          <a class="btn btn-secondary" href="/team">Meet the execs</a>
         </div>
       </div>
     </section>
@@ -95,10 +95,12 @@ function formatEventDate(iso: string) {
     <section class="section-shell closing" aria-labelledby="closing-heading">
       <h2 id="closing-heading" class="closing__title">Join the room</h2>
       <p class="closing__copy">
-        Come for a talk, stay for the Discord threads, the late workshop nights, and the people who
-        make health tech feel less solitary.
+        Come for a talk, stay for the workshops, hackathons, and the people who make health tech
+        feel less solitary.
       </p>
-      <a class="btn btn-primary" href={site.social.discord}>Join Discord</a>
+      <a class="btn btn-primary" href={site.social.usu} rel="noopener noreferrer" target="_blank">
+        Join via USU
+      </a>
     </section>
   </main>
 </BaseLayout>

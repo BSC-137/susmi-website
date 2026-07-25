@@ -1,58 +1,197 @@
 [
   {
-    "id": "president",
-    "name": "Aisha Rahman",
+    "id": "tanisha-joshi",
+    "name": "Tanisha Joshi",
     "role": "President",
-    "degree": "MD / BSc (Med Sci)",
-    "year": "Year 4",
-    "bio": "Leads strategy and external partnerships across medicine and engineering."
+    "order": 1,
+    "degree": "Bachelor of Science (Neuroscience major, Sociology minor)",
+    "linkedin": "https://www.linkedin.com/in/REPLACE_ME",
+    "photo": "/team/tanisha-joshi.jpg",
+    "photoAlt": "Portrait of Tanisha Joshi",
+    "photoSecondary": null,
+    "quote": "A ship in a harbour is safe. But that is not what ships are made for.",
+    "nowPlaying": { "title": "Krystal", "artist": "Matt Maltese" },
+    "comfortMedia": { "label": "Comfort movie", "title": "Palm Springs" },
+    "prompts": {
+      "altPath": "What would you be doing if not this degree?",
+      "altAnswer": "Writing poetry on the Bavarian Alps",
+      "cantLiveWithout": "Emotional support water bottle + lemon iced tea",
+      "redFlag": "Severe Google Calendar organisation",
+      "secretTalent": "Impersonating her mom’s laughter",
+      "bucketList": ["Trip to Antarctica", "Become fluent in 6 languages"]
+    }
   },
   {
-    "id": "vp-events",
-    "name": "James Chen",
-    "role": "Vice President (Events)",
-    "degree": "B Biomedical Engineering",
-    "year": "Year 3",
-    "bio": "Runs the semester calendar — talks, workshops, and MedHack logistics."
+    "id": "bharat-sharma",
+    "name": "Bharat Sharma",
+    "role": "Vice President (Internals)",
+    "order": 2,
+    "degree": "Bachelor of Advanced Computing",
+    "linkedin": "https://www.linkedin.com/in/REPLACE_ME",
+    "photo": "/team/bharat-sharma.jpg",
+    "photoAlt": "Portrait of Bharat Sharma",
+    "photoSecondary": null,
+    "quote": null,
+    "nowPlaying": null,
+    "comfortMedia": { "label": "Comfort movie", "title": "The Dark Knight" },
+    "prompts": {
+      "altPath": "What would you be doing if not this degree?",
+      "altAnswer": "Becoming a filmmaker",
+      "cantLiveWithout": "Books and video games",
+      "secretTalent": "Table tennis",
+      "lastMeal": "Margherita pizza + Diet Coke",
+      "bucketList": ["Travel to Japan"]
+    }
   },
   {
-    "id": "vp-education",
-    "name": "Priya Nair",
-    "role": "Vice President (Education)",
-    "degree": "BSc / MPhil (Bioinformatics)",
-    "year": "Honours",
-    "bio": "Designs skill-building workshops bridging wet lab and computational biology."
+    "id": "brandon-madzoski",
+    "name": "Brandon Madzoski",
+    "role": "Vice President (Externals)",
+    "order": 3,
+    "degree": "Bachelor of Biomedical Engineering and Bachelor of Medical Science",
+    "linkedin": "https://www.linkedin.com/in/REPLACE_ME",
+    "photo": "/team/brandon-madzoski.jpg",
+    "photoAlt": "Portrait of Brandon Madzoski",
+    "photoSecondary": null,
+    "quote": null,
+    "nowPlaying": { "title": "Pistachios", "artist": "Brent Faiyaz" },
+    "comfortMedia": { "label": "Comfort watch", "title": "2021 Chelsea vs Manchester City UCL Final" },
+    "prompts": {
+      "altPath": "What would you be doing if not this degree?",
+      "altAnswer": "Maybe law? Honestly can’t imagine doing another degree",
+      "cantLiveWithout": "Spotify Premium",
+      "redFlag": "Shredded cheese with every meal",
+      "secretTalent": "Can forward park into a spot in one go",
+      "bucketList": ["Visit Macedonia"]
+    }
   },
   {
-    "id": "treasurer",
-    "name": "Lucas Moretti",
-    "role": "Treasurer",
-    "degree": "B Commerce / B Science",
-    "year": "Year 2",
-    "bio": "Manages budgets, grants, and sponsorship tracking for S2 programs."
-  },
-  {
-    "id": "secretary",
-    "name": "Elena Park",
+    "id": "sam-odonnell",
+    "name": "Sam O'Donnell",
     "role": "Secretary",
-    "degree": "B Advanced Science (Biology)",
-    "year": "Year 3",
-    "bio": "Keeps member communications, minutes, and society records organised."
+    "order": 4,
+    "degree": "Bachelor of Biomedical Engineering and Bachelor of Medical Science",
+    "linkedin": "https://www.linkedin.com/in/REPLACE_ME",
+    "photo": "/team/sam-odonnell.jpg",
+    "photoAlt": "Portrait of Sam O'Donnell",
+    "photoSecondary": null,
+    "quote": "Never give in, never give up; always be kind and never fail to be nice.",
+    "nowPlaying": { "title": "Time", "artist": "Hans Zimmer" },
+    "comfortMedia": { "label": "Comfort movie", "title": "Doctor Strange" },
+    "prompts": {
+      "altPath": "What would you be doing if not this degree?",
+      "altAnswer": "Visual art",
+      "cantLiveWithout": "Food and sleep (so original)",
+      "secretTalent": "Playing the clarinet",
+      "lastMeal": "Lasagna and tiramisu",
+      "bucketList": ["Go to Ireland"]
+    }
   },
   {
-    "id": "marketing",
-    "name": "Noah Williams",
-    "role": "Marketing Officer",
-    "degree": "B Design / B Science",
-    "year": "Year 2",
-    "bio": "Owns Instagram, Discord presence, and event creative assets."
+    "id": "jessica-li",
+    "name": "Jessica Li",
+    "role": "Treasurer",
+    "order": 5,
+    "degree": "Bachelor of Commerce and Bachelor of Science",
+    "linkedin": "https://www.linkedin.com/in/REPLACE_ME",
+    "photo": "/team/jessica-li.jpg",
+    "photoAlt": "Portrait of Jessica Li",
+    "photoSecondary": null,
+    "quote": null,
+    "nowPlaying": { "title": "Sweet Boy", "artist": "Malcolm Todd" },
+    "comfortMedia": { "label": "Comfort show", "title": "Drive to Survive" },
+    "prompts": {
+      "altPath": "What would you be doing if not this degree?",
+      "altAnswer": "Becoming a finance bro (I am a finance bro)",
+      "cantLiveWithout": "AirPods and music",
+      "lastMeal": "Iced strawberry matcha"
+    }
   },
   {
-    "id": "tech-lead",
-    "name": "Sofia Alvarez",
-    "role": "Technology Lead",
-    "degree": "B Computer Science / Medical Science",
-    "year": "Year 3",
-    "bio": "Builds internal tools and supports hackathon tech stacks."
+    "id": "zeny-yang",
+    "name": "Zeny Yang",
+    "role": "Sponsorship Director",
+    "order": 6,
+    "degree": "Bachelor of Science",
+    "linkedin": "https://www.linkedin.com/in/REPLACE_ME",
+    "photo": "/team/zeny-yang.jpg",
+    "photoAlt": "Portrait of Zeny Yang",
+    "photoSecondary": null,
+    "quote": "When life gives you lemons, make lemonade!",
+    "nowPlaying": { "title": "Sk8er Boi", "artist": "Avril Lavigne" },
+    "comfortMedia": { "label": "Comfort watch", "title": "Ghibli series" },
+    "prompts": {
+      "altPath": "What would you be doing if not this degree?",
+      "altAnswer": "Children’s book illustrator",
+      "cantLiveWithout": "Friends, coffee, books, shopping",
+      "secretTalent": "Can swallow seven pills with one sip of water",
+      "bucketList": ["Vivienne Westwood shopping spree"]
+    }
+  },
+  {
+    "id": "sejal-mall",
+    "name": "Sejal Mall",
+    "role": "Events Director",
+    "order": 7,
+    "degree": "Bachelor of Biomedical Engineering and Bachelor of Medical Science",
+    "linkedin": "https://www.linkedin.com/in/REPLACE_ME",
+    "photo": "/team/sejal-mall.jpg",
+    "photoAlt": "Portrait of Sejal Mall",
+    "photoSecondary": null,
+    "quote": "Today is the tomorrow you dreamed of yesterday",
+    "nowPlaying": { "title": "A New Kind of Love", "artist": "Frou Frou" },
+    "comfortMedia": { "label": "Comfort movie", "title": "10 Things I Hate About You" },
+    "prompts": {
+      "altPath": "What would you be doing if not this degree?",
+      "altAnswer": "Blogging & reading unread books",
+      "cantLiveWithout": "Headphones & matcha",
+      "redFlag": "17 unread books but keeps buying more",
+      "lastMeal": "Thai fried rice",
+      "bucketList": ["Bungee jumping"]
+    }
+  },
+  {
+    "id": "juliet-chiew",
+    "name": "Juliet Chiew",
+    "role": "Marketing Director",
+    "order": 8,
+    "degree": "Bachelor of Biomedical Engineering and Bachelor of Medical Science",
+    "linkedin": "https://www.linkedin.com/in/REPLACE_ME",
+    "photo": "/team/juliet-chiew.jpg",
+    "photoAlt": "Portrait of Juliet Chiew",
+    "photoSecondary": null,
+    "quote": null,
+    "nowPlaying": { "title": "Waiting Room", "artist": "Phoebe Bridgers" },
+    "comfortMedia": { "label": "Comfort movie", "title": "Love Actually" },
+    "prompts": {
+      "altPath": "What would you be doing if not this degree?",
+      "altAnswer": "Opening a flower shop",
+      "cantLiveWithout": "Uggs and daily naps",
+      "redFlag": "Hates milk and eggs",
+      "lastMeal": "BBQ pork buns at yum cha",
+      "bucketList": ["Live in London and watch Chelsea at Stamford Bridge"]
+    }
+  },
+  {
+    "id": "daniel-hill",
+    "name": "Daniel Hill",
+    "role": "General Executive",
+    "order": 9,
+    "degree": "Bachelor of Biomedical Engineering and Bachelor of Medical Science",
+    "linkedin": "https://www.linkedin.com/in/REPLACE_ME",
+    "photo": "/team/daniel-hill.jpg",
+    "photoAlt": "Portrait of Daniel Hill",
+    "photoSecondary": null,
+    "quote": "Just keep swimming.",
+    "nowPlaying": { "title": "Sultans of Swing", "artist": "Dire Straits" },
+    "comfortMedia": { "label": "Comfort show", "title": "Schitt’s Creek" },
+    "prompts": {
+      "altPath": "What would you be doing if not this degree?",
+      "altAnswer": "Becoming an astronaut",
+      "cantLiveWithout": "Nutri-Grain",
+      "redFlag": "Doesn’t really like sushi",
+      "lastMeal": "Grandma’s caramel slice",
+      "bucketList": ["Summit K2 with bro"]
+    }
   }
 ]

@@ -1,0 +1,150 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TeamRoster from "../components/team/TeamRoster.astro";
+import ExecDossier from "../components/team/ExecDossier.astro";
+import { site } from "../data/site";
+import rawExecs from "../data/execs.json";
+import type { Exec } from "../types";
+
+const execs = [...(rawExecs as Exec[])].sort((a, b) => a.order - b.order);
+const initialId = execs[0]?.id ?? "";
+
+const requested =
+  Astro.url.searchParams.get("member") ||
+  Astro.url.hash.replace(/^#/, "") ||
+  "";
+const activeId = execs.some((e) => e.id === requested) ? requested : initialId;
+---
+
+<BaseLayout
+  title="Team — SUSMI"
+  description="Meet the executive team of the Sydney University Society of Medical Innovation."
+>
+  <main>
+    <section class="section-shell page-intro">
+      <div class="page-intro__sheen" aria-hidden="true"></div>
+      <h1>The execs</h1>
+      <p>
+        The people running SUSMI at the intersection of medicine, biology, and technology —
+        {site.semester}.
+      </p>
+    </section>
+
+    <section
+      class="section-shell team-stage"
+      data-team-root
+      data-initial-member={initialId}
+      aria-label="Executive dossiers"
+    >
+      <div class="team-stage__grid">
+        <TeamRoster execs={execs} activeId={activeId} />
+        <div class="team-stage__dossier" data-dossier-stage>
+          {execs.map((exec) => <ExecDossier exec={exec} active={exec.id === activeId} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell team-join" aria-labelledby="team-join-heading">
+      <h2 id="team-join-heading">Want in?</h2>
+      <p>
+        Come to an event, follow us on Instagram, and join through USU to help shape what medical
+        innovation looks like on campus.
+      </p>
+      <div class="team-join__actions">
+        <a class="btn btn-primary" href={site.social.usu} rel="noopener noreferrer" target="_blank">
+          Join via USU
+        </a>
+        <a
+          class="btn btn-secondary"
+          href={site.social.instagram}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Instagram
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<script>
+  import { initTeamPage } from "../scripts/team-ui";
+
+  const boot = () => {
+    const root = document.querySelector<HTMLElement>("[data-team-root]");
+    if (root && !root.dataset.ready) {
+      root.dataset.ready = "1";
+      initTeamPage(root);
+    }
+  };
+
+  boot();
+  document.addEventListener("astro:page-load", () => {
+    const root = document.querySelector<HTMLElement>("[data-team-root]");
+    if (root) delete root.dataset.ready;
+    boot();
+  });
+</script>
+
+<style>
+  .page-intro {
+    position: relative;
+    padding-bottom: 1.5rem;
+  }
+
+  .page-intro__sheen {
+    position: absolute;
+    inset: -10% -5% auto;
+    height: 12rem;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 20% 40%, rgba(232, 234, 237, 0.12), transparent 70%),
+      radial-gradient(ellipse 50% 70% at 75% 30%, rgba(200, 204, 210, 0.08), transparent 65%);
+    filter: blur(18px);
+    opacity: 0.85;
+  }
+
+  .page-intro :global(h1),
+  .page-intro :global(p) {
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-intro :global(p) {
+    max-width: 36rem;
+  }
+
+  .team-stage {
+    padding-top: 0;
+  }
+
+  .team-stage__grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 960px) {
+    .team-stage__grid {
+      grid-template-columns: minmax(16rem, 18.5rem) minmax(0, 1fr);
+      gap: 1.5rem;
+      align-items: start;
+    }
+  }
+
+  .team-join h2 {
+    margin: 0;
+    font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  }
+
+  .team-join p {
+    margin: 0.75rem 0 1.35rem;
+    max-width: 32rem;
+  }
+
+  .team-join__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+</style>
