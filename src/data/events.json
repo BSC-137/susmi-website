@@ -1,0 +1,82 @@
+[
+  {
+    "id": "s2-welcome-mixer",
+    "title": "SUSMI Welcome Mixer",
+    "date": "2026-08-05",
+    "time": "18:00",
+    "location": "Holme Building Courtyard",
+    "type": "social",
+    "description": "Kick off Semester 2 with new members, execs, and mentors. Light snacks, society overview, and project interest boards.",
+    "tags": ["welcome", "networking", "semester-2"]
+  },
+  {
+    "id": "medtech-foundations",
+    "title": "MedTech Foundations: From Bench to Bedside",
+    "date": "2026-08-13",
+    "time": "17:30",
+    "location": "Charles Perkins Centre, Seminar Room 1.3",
+    "type": "talk",
+    "description": "Guest clinicians and engineers unpack how early-stage medical devices move from lab prototypes into clinical pathways.",
+    "tags": ["medtech", "careers", "guest-speaker"]
+  },
+  {
+    "id": "python-for-bioinformatics",
+    "title": "Workshop: Python for Bioinformatics",
+    "date": "2026-08-27",
+    "time": "16:00",
+    "location": "PNR Building, Lab 228",
+    "type": "workshop",
+    "description": "Hands-on intro to pandas and Biopython for sequence analysis. Bring a laptop; no prior bioinformatics required.",
+    "tags": ["python", "bioinformatics", "beginner-friendly"]
+  },
+  {
+    "id": "ai-in-radiology",
+    "title": "AI in Radiology: Promise and Pitfalls",
+    "date": "2026-09-10",
+    "time": "17:30",
+    "location": "Susan Wakil Health Building, Lecture Theatre A",
+    "type": "talk",
+    "description": "Radiologists and ML researchers discuss model validation, clinical deployment, and what students should learn next.",
+    "tags": ["ai", "imaging", "clinical"]
+  },
+  {
+    "id": "wearables-lab-night",
+    "title": "Wearables Lab Night",
+    "date": "2026-09-24",
+    "time": "18:00",
+    "location": "Sydney Nanoscience Hub, Teaching Lab",
+    "type": "workshop",
+    "description": "Prototype a simple heart-rate sensing workflow with off-the-shelf sensors and discuss signal quality vs clinical standards.",
+    "tags": ["hardware", "wearables", "sensors"]
+  },
+  {
+    "id": "medhack-s2",
+    "title": "MedHack S2: 24-Hour Health Challenge",
+    "date": "2026-10-10",
+    "time": "09:00",
+    "location": "Abercrombie Business School, Innovation Hub",
+    "type": "hack",
+    "description": "Cross-disciplinary teams tackle a healthcare brief overnight. Mentors from industry and research on site.",
+    "tags": ["hackathon", "teams", "innovation"]
+  },
+  {
+    "id": "industry-night",
+    "title": "Industry Night: Health Startups & Hospital Innovation",
+    "date": "2026-10-22",
+    "time": "17:00",
+    "location": "The Nest, University of Sydney",
+    "type": "talk",
+    "description": "Panel with founders and hospital innovation leads on internships, pathways, and building in regulated spaces.",
+    "tags": ["industry", "careers", "startups"]
+  },
+  {
+    "id": "end-of-sem-social",
+    "title": "End-of-Semester Social",
+    "date": "2026-11-12",
+    "time": "18:30",
+    "location": "Manning Bar",
+    "type": "social",
+    "description": "Celebrate the semester, showcase project demos, and thank volunteers before exams.",
+    "tags": ["social", "community", "wrap-up"]
+  }
+]

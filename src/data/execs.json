@@ -1,0 +1,58 @@
+[
+  {
+    "id": "president",
+    "name": "Aisha Rahman",
+    "role": "President",
+    "degree": "MD / BSc (Med Sci)",
+    "year": "Year 4",
+    "bio": "Leads strategy and external partnerships across medicine and engineering."
+  },
+  {
+    "id": "vp-events",
+    "name": "James Chen",
+    "role": "Vice President (Events)",
+    "degree": "B Biomedical Engineering",
+    "year": "Year 3",
+    "bio": "Runs the semester calendar — talks, workshops, and MedHack logistics."
+  },
+  {
+    "id": "vp-education",
+    "name": "Priya Nair",
+    "role": "Vice President (Education)",
+    "degree": "BSc / MPhil (Bioinformatics)",
+    "year": "Honours",
+    "bio": "Designs skill-building workshops bridging wet lab and computational biology."
+  },
+  {
+    "id": "treasurer",
+    "name": "Lucas Moretti",
+    "role": "Treasurer",
+    "degree": "B Commerce / B Science",
+    "year": "Year 2",
+    "bio": "Manages budgets, grants, and sponsorship tracking for S2 programs."
+  },
+  {
+    "id": "secretary",
+    "name": "Elena Park",
+    "role": "Secretary",
+    "degree": "B Advanced Science (Biology)",
+    "year": "Year 3",
+    "bio": "Keeps member communications, minutes, and society records organised."
+  },
+  {
+    "id": "marketing",
+    "name": "Noah Williams",
+    "role": "Marketing Officer",
+    "degree": "B Design / B Science",
+    "year": "Year 2",
+    "bio": "Owns Instagram, Discord presence, and event creative assets."
+  },
+  {
+    "id": "tech-lead",
+    "name": "Sofia Alvarez",
+    "role": "Technology Lead",
+    "degree": "B Computer Science / Medical Science",
+    "year": "Year 3",
+    "bio": "Builds internal tools and supports hackathon tech stacks."
+  }
+]

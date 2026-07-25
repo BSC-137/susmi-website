@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+import execs from "../data/execs.json";
+---
+
+<BaseLayout title={`About — ${site.name}`} description={`About ${site.fullName}: mission, community, and executive team.`}>
+  <main>
+    <h1>About</h1>
+    <p>{site.mission}</p>
+    <h2>Executive team</h2>
+    <ul>
+      {
+        execs.map((exec) => (
+          <li>
+            <strong>{exec.name}</strong> — {exec.role} ({exec.degree}, {exec.year})
+          </li>
+        ))
+      }
+    </ul>
+    <p>
+      Contact: {site.social.email} · Instagram · Discord
+    </p>
+  </main>
+</BaseLayout>
