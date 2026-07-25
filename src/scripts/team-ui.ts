@@ -27,7 +27,14 @@ export function initTeamPage(root: HTMLElement) {
       item.classList.toggle("is-active", on);
       item.setAttribute("aria-selected", String(on));
       item.tabIndex = on ? 0 : -1;
-      if (on && focusItem) item.focus();
+      if (on) {
+        if (focusItem) item.focus();
+        item.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          inline: "center",
+          block: "nearest",
+        });
+      }
     });
 
     dossiers.forEach((panel) => {

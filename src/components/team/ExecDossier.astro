@@ -45,78 +45,82 @@ if (exec.prompts.bucketList?.length) {
   <div class="dossier__watermark" aria-hidden="true">{initials}</div>
 
   <div class="dossier__layout">
-    <div class="dossier__media">
-      <div class="dossier__photo glass-panel">
-        <div class="dossier__monogram" aria-hidden="true">{initials}</div>
-        <img
-          class="dossier__img"
-          src={exec.photo}
-          alt={exec.photoAlt}
-          width="480"
-          height="600"
-          loading="lazy"
-          data-photo-primary
-        />
+    <div class="dossier__top">
+      <div class="dossier__media">
+        <div class="dossier__photo glass-panel">
+          <div class="dossier__monogram" aria-hidden="true">{initials}</div>
+          <img
+            class="dossier__img"
+            src={exec.photo}
+            alt={exec.photoAlt}
+            width="480"
+            height="600"
+            loading="lazy"
+            data-photo-primary
+          />
+        </div>
+
+        {
+          linkedInOk ? (
+            <LinkedInMark href={exec.linkedin} name={exec.name} />
+          ) : (
+            <p class="dossier__linkedin-soon">LinkedIn soon</p>
+          )
+        }
+
+        {
+          exec.photoSecondary && (
+            <div class="dossier__photo dossier__photo--secondary glass-panel" data-secondary-frame>
+              <img
+                class="dossier__img"
+                src={exec.photoSecondary}
+                alt=""
+                width="200"
+                height="240"
+                loading="lazy"
+                data-photo-secondary
+              />
+            </div>
+          )
+        }
       </div>
 
-      {
-        linkedInOk ? (
-          <LinkedInMark href={exec.linkedin} name={exec.name} />
-        ) : (
-          <p class="dossier__linkedin-soon">LinkedIn soon</p>
-        )
-      }
-
-      {
-        exec.photoSecondary && (
-          <div class="dossier__photo dossier__photo--secondary glass-panel" data-secondary-frame>
-            <img
-              class="dossier__img"
-              src={exec.photoSecondary}
-              alt=""
-              width="200"
-              height="240"
-              loading="lazy"
-              data-photo-secondary
-            />
-          </div>
-        )
-      }
+      <div class="dossier__identity">
+        <h2 class="dossier__name mercury-text" id={`dossier-name-${exec.id}`}>{exec.name}</h2>
+        <p class="dossier__role">{exec.role}</p>
+        <p class="dossier__degree">{exec.degree}</p>
+      </div>
     </div>
 
-    <div class="dossier__body">
-      <h2 class="dossier__name mercury-text" id={`dossier-name-${exec.id}`}>{exec.name}</h2>
-      <p class="dossier__role">{exec.role}</p>
-      <p class="dossier__degree">{exec.degree}</p>
-
-      {
-        signals.length > 0 && (
-          <div class="dossier__signals">
-            <h3 class="dossier__signals-label">Signals</h3>
-            <div class="signals-grid">
-              {signals.map((signal) => (
-                <div class="signal-cell glass-panel">
-                  <p class="signal-cell__label">{signal.label}</p>
-                  {Array.isArray(signal.body) ? (
-                    <ul class="signal-cell__list">
-                      {signal.body.map((item) => (
-                        <li>{item}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p class="signal-cell__body">{signal.body}</p>
-                  )}
-                </div>
-              ))}
-            </div>
+    {
+      signals.length > 0 && (
+        <div class="dossier__signals">
+          <h3 class="dossier__signals-label">Signals</h3>
+          <div class="signals-grid">
+            {signals.map((signal) => (
+              <div class="signal-cell glass-panel">
+                <p class="signal-cell__label">{signal.label}</p>
+                {Array.isArray(signal.body) ? (
+                  <ul class="signal-cell__list">
+                    {signal.body.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p class="signal-cell__body">{signal.body}</p>
+                )}
+              </div>
+            ))}
           </div>
-        )
-      }
+        </div>
+      )
+    }
 
-      {
-        (exec.quote || exec.comfortMedia || exec.nowPlaying) && (
-          <div class="dossier__extras">
-            {exec.quote && <blockquote class="dossier__quote">{exec.quote}</blockquote>}
+    {
+      (exec.quote || exec.comfortMedia || exec.nowPlaying) && (
+        <div class="dossier__extras">
+          {exec.quote && <blockquote class="dossier__quote">{exec.quote}</blockquote>}
+          <div class="dossier__meta-row">
             {exec.comfortMedia && (
               <div class="comfort-ticket" aria-label={exec.comfortMedia.label}>
                 <span class="comfort-ticket__label">{exec.comfortMedia.label}</span>
@@ -135,9 +139,9 @@ if (exec.prompts.bucketList?.length) {
               </div>
             )}
           </div>
-        )
-      }
-    </div>
+        </div>
+      )
+    }
   </div>
 </article>
 
@@ -146,7 +150,7 @@ if (exec.prompts.bucketList?.length) {
     position: relative;
     overflow: hidden;
     border-radius: 0.75rem;
-    padding: clamp(1.25rem, 3vw, 2rem);
+    padding: 1rem;
   }
 
   .dossier[hidden] {
@@ -160,7 +164,7 @@ if (exec.prompts.bucketList?.length) {
   @keyframes dossier-in {
     from {
       opacity: 0;
-      transform: translateY(0.6rem);
+      transform: translateY(0.45rem);
     }
     to {
       opacity: 1;
@@ -170,15 +174,15 @@ if (exec.prompts.bucketList?.length) {
 
   .dossier__watermark {
     position: absolute;
-    right: -2%;
-    top: 8%;
+    right: -4%;
+    top: 4%;
     font-family: var(--font-display);
-    font-size: clamp(8rem, 22vw, 14rem);
+    font-size: clamp(5.5rem, 28vw, 14rem);
     font-weight: 700;
     letter-spacing: -0.08em;
     line-height: 0.8;
     color: var(--mercury-bright);
-    opacity: 0.05;
+    opacity: 0.045;
     pointer-events: none;
     user-select: none;
   }
@@ -187,29 +191,28 @@ if (exec.prompts.bucketList?.length) {
     position: relative;
     z-index: 1;
     display: grid;
-    gap: 1.75rem;
+    gap: 1.15rem;
   }
 
-  @media (min-width: 820px) {
-    .dossier__layout {
-      grid-template-columns: minmax(12rem, 17rem) minmax(0, 1fr);
-      gap: 2rem;
-      align-items: start;
-    }
+  .dossier__top {
+    display: grid;
+    grid-template-columns: 6.75rem minmax(0, 1fr);
+    gap: 0.9rem 1rem;
+    align-items: start;
   }
 
   .dossier__media {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.75rem;
+    gap: 0.55rem;
   }
 
   .dossier__photo {
     position: relative;
-    width: min(100%, 17rem);
+    width: 6.75rem;
     aspect-ratio: 4 / 5;
-    border-radius: 0.55rem;
+    border-radius: 0.5rem;
     overflow: hidden;
     background:
       radial-gradient(ellipse at 30% 20%, rgba(232, 234, 237, 0.12), transparent 55%),
@@ -217,9 +220,7 @@ if (exec.prompts.bucketList?.length) {
   }
 
   .dossier__photo--secondary {
-    width: 7.5rem;
-    aspect-ratio: 5 / 6;
-    opacity: 0.85;
+    display: none;
   }
 
   .dossier__monogram {
@@ -228,15 +229,11 @@ if (exec.prompts.bucketList?.length) {
     display: grid;
     place-items: center;
     font-family: var(--font-display);
-    font-size: 3.5rem;
+    font-size: 1.65rem;
     font-weight: 700;
     letter-spacing: -0.06em;
     color: var(--mercury);
     background: linear-gradient(160deg, rgba(200, 204, 210, 0.1), transparent 60%);
-  }
-
-  .dossier__photo--secondary .dossier__monogram {
-    font-size: 1.75rem;
   }
 
   .dossier__img {
@@ -258,39 +255,44 @@ if (exec.prompts.bucketList?.length) {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     color: var(--mercury-dim);
+  }
+
+  .dossier__identity {
+    min-width: 0;
+    padding-top: 0.15rem;
   }
 
   .dossier__name {
     margin: 0;
-    font-size: clamp(2rem, 4.5vw, 3rem);
-    line-height: 1;
+    font-size: clamp(1.55rem, 7vw, 2.15rem);
+    line-height: 1.02;
   }
 
   .dossier__role {
-    margin: 0.65rem 0 0;
-    font-size: 0.75rem;
+    margin: 0.45rem 0 0;
+    font-size: 0.68rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--mercury);
   }
 
   .dossier__degree {
-    margin: 0.55rem 0 0;
-    max-width: 36rem;
-    font-size: 0.95rem;
+    margin: 0.4rem 0 0;
+    font-size: 0.84rem;
+    line-height: 1.4;
     color: var(--text-muted);
   }
 
   .dossier__signals {
-    margin-top: 1.75rem;
+    margin-top: 0.15rem;
   }
 
   .dossier__signals-label {
-    margin: 0 0 0.75rem;
-    font-size: 0.75rem;
+    margin: 0 0 0.55rem;
+    font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -299,23 +301,17 @@ if (exec.prompts.bucketList?.length) {
 
   .signals-grid {
     display: grid;
-    gap: 0.65rem;
-  }
-
-  @media (min-width: 720px) {
-    .signals-grid {
-      grid-template-columns: 1fr 1fr;
-    }
+    gap: 0.5rem;
   }
 
   .signal-cell {
     border-radius: 0.45rem;
-    padding: 0.9rem 1rem;
+    padding: 0.7rem 0.8rem;
   }
 
   .signal-cell__label {
     margin: 0;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -323,71 +319,73 @@ if (exec.prompts.bucketList?.length) {
   }
 
   .signal-cell__body {
-    margin: 0.4rem 0 0;
+    margin: 0.3rem 0 0;
     color: var(--mercury-bright);
-    font-size: 0.95rem;
-    line-height: 1.45;
+    font-size: 0.9rem;
+    line-height: 1.4;
   }
 
   .signal-cell__list {
     list-style: none;
-    margin: 0.45rem 0 0;
+    margin: 0.35rem 0 0;
     padding: 0;
     display: grid;
-    gap: 0.35rem;
+    gap: 0.3rem;
   }
 
   .signal-cell__list li {
     position: relative;
-    padding-left: 1.15rem;
+    padding-left: 1.05rem;
     color: var(--mercury-bright);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 
   .signal-cell__list li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 0.45rem;
-    width: 0.55rem;
-    height: 0.55rem;
+    top: 0.4rem;
+    width: 0.5rem;
+    height: 0.5rem;
     border: 1px solid var(--mercury);
     border-radius: 0.1rem;
     background: linear-gradient(180deg, rgba(232, 234, 237, 0.35), rgba(138, 144, 153, 0.15));
-    box-shadow: inset 0 0 0 1px rgba(5, 5, 5, 0.35);
   }
 
   .dossier__extras {
-    margin-top: 1.75rem;
     display: grid;
-    gap: 0.75rem;
+    gap: 0.65rem;
+  }
+
+  .dossier__meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
   .dossier__quote {
     margin: 0;
-    max-width: 36rem;
     font-style: italic;
-    font-size: 1.02rem;
-    line-height: 1.55;
+    font-size: 0.95rem;
+    line-height: 1.5;
     color: var(--mercury);
     border-left: 1px solid var(--glass-border);
-    padding-left: 1rem;
+    padding-left: 0.85rem;
   }
 
   .comfort-ticket {
     display: inline-flex;
     flex-direction: column;
-    gap: 0.2rem;
-    width: fit-content;
+    gap: 0.15rem;
     max-width: 100%;
-    padding: 0.7rem 1rem;
+    padding: 0.55rem 0.8rem;
     border: 1px dashed rgba(232, 234, 237, 0.28);
     border-radius: 0.4rem;
     background: rgba(200, 204, 210, 0.04);
   }
 
   .comfort-ticket__label {
-    font-size: 0.68rem;
+    font-size: 0.64rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--mercury-dim);
@@ -395,16 +393,15 @@ if (exec.prompts.bucketList?.length) {
 
   .comfort-ticket__title {
     color: var(--mercury-bright);
-    font-size: 0.95rem;
+    font-size: 0.88rem;
   }
 
   .now-playing {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    width: fit-content;
+    gap: 0.6rem;
     max-width: 100%;
-    padding: 0.7rem 1rem;
+    padding: 0.55rem 0.8rem;
     border-radius: 0.45rem;
     border: 1px solid var(--glass-border);
     background: rgba(200, 204, 210, 0.05);
@@ -414,7 +411,8 @@ if (exec.prompts.bucketList?.length) {
     display: inline-flex;
     align-items: flex-end;
     gap: 0.15rem;
-    height: 0.9rem;
+    height: 0.85rem;
+    flex-shrink: 0;
   }
 
   .now-playing__eq i {
@@ -447,8 +445,89 @@ if (exec.prompts.bucketList?.length) {
   }
 
   .now-playing__text {
-    font-size: 0.9rem;
+    font-size: 0.84rem;
     color: var(--mercury-bright);
+    line-height: 1.3;
+  }
+
+  @media (min-width: 640px) {
+    .dossier {
+      padding: 1.35rem;
+    }
+
+    .dossier__top {
+      grid-template-columns: 9rem minmax(0, 1fr);
+      gap: 1.15rem;
+    }
+
+    .dossier__photo {
+      width: 9rem;
+    }
+
+    .dossier__monogram {
+      font-size: 2.2rem;
+    }
+
+    .dossier__name {
+      font-size: clamp(1.9rem, 4vw, 2.5rem);
+    }
+
+    .signals-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .dossier {
+      padding: clamp(1.4rem, 2.5vw, 2rem);
+    }
+
+    .dossier__layout {
+      gap: 1.5rem;
+    }
+
+    .dossier__top {
+      grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr);
+      gap: 1.75rem;
+    }
+
+    .dossier__photo {
+      width: min(100%, 16rem);
+    }
+
+    .dossier__photo--secondary {
+      display: block;
+      width: 7.5rem;
+      aspect-ratio: 5 / 6;
+      opacity: 0.85;
+    }
+
+    .dossier__monogram {
+      font-size: 3.25rem;
+    }
+
+    .dossier__name {
+      font-size: clamp(2.2rem, 3.5vw, 3rem);
+    }
+
+    .dossier__role {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+    }
+
+    .dossier__degree {
+      font-size: 0.95rem;
+      max-width: 34rem;
+    }
+
+    .signal-cell {
+      padding: 0.9rem 1rem;
+    }
+
+    .signal-cell__body,
+    .signal-cell__list li {
+      font-size: 0.95rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -89,13 +89,13 @@ const activeId = execs.some((e) => e.id === requested) ? requested : initialId;
 <style>
   .page-intro {
     position: relative;
-    padding-bottom: 1.5rem;
+    padding-block: clamp(2.25rem, 7vw, 5rem) 0.75rem;
   }
 
   .page-intro__sheen {
     position: absolute;
     inset: -10% -5% auto;
-    height: 12rem;
+    height: 10rem;
     pointer-events: none;
     z-index: 0;
     background:
@@ -105,26 +105,41 @@ const activeId = execs.some((e) => e.id === requested) ? requested : initialId;
     opacity: 0.85;
   }
 
-  .page-intro :global(h1),
+  .page-intro :global(h1) {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    font-size: clamp(2.1rem, 9vw, 3.25rem);
+  }
+
   .page-intro :global(p) {
     position: relative;
     z-index: 1;
-  }
-
-  .page-intro :global(p) {
-    max-width: 36rem;
+    margin: 0.75rem 0 0;
+    max-width: 34rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
   }
 
   .team-stage {
-    padding-top: 0;
+    padding-top: 0.5rem;
+    padding-bottom: clamp(2.5rem, 7vw, 5rem);
   }
 
   .team-stage__grid {
     display: grid;
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
   @media (min-width: 960px) {
+    .page-intro {
+      padding-block: clamp(3.5rem, 9vw, 6.5rem) 1.25rem;
+    }
+
+    .page-intro :global(p) {
+      font-size: 1.02rem;
+    }
+
     .team-stage__grid {
       grid-template-columns: minmax(16rem, 18.5rem) minmax(0, 1fr);
       gap: 1.5rem;
@@ -132,19 +147,37 @@ const activeId = execs.some((e) => e.id === requested) ? requested : initialId;
     }
   }
 
+  .team-join {
+    padding-top: 0.5rem;
+  }
+
   .team-join h2 {
     margin: 0;
-    font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+    font-size: clamp(1.65rem, 5vw, 2.25rem);
   }
 
   .team-join p {
-    margin: 0.75rem 0 1.35rem;
+    margin: 0.7rem 0 1.2rem;
     max-width: 32rem;
+    font-size: 0.95rem;
   }
 
   .team-join__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  @media (min-width: 480px) {
+    .team-join__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .team-join__actions :global(.btn) {
+      width: 100%;
+    }
   }
 </style>

@@ -7,10 +7,24 @@ interface Props {
 }
 
 const { execs, activeId } = Astro.props;
+
+function shortRole(role: string) {
+  return role
+    .replace("Vice President", "VP")
+    .replace("Director", "Dir.")
+    .replace("General Executive", "Gen. Exec");
+}
+
+function firstName(name: string) {
+  return name.split(/\s+/)[0] ?? name;
+}
 ---
 
 <nav class="team-roster" aria-label="Executive roster" data-team-roster>
-  <p class="team-roster__label">Roster</p>
+  <div class="team-roster__head">
+    <p class="team-roster__label">Roster</p>
+    <p class="team-roster__hint" aria-hidden="true">Swipe</p>
+  </div>
   <ul class="team-roster__list" role="listbox" aria-label="Select an executive" data-roster-list>
     {
       execs.map((exec) => (
@@ -21,13 +35,20 @@ const { execs, activeId } = Astro.props;
             role="option"
             id={`roster-${exec.id}`}
             data-roster-item={exec.id}
+            aria-label={`${exec.name}, ${exec.role}`}
             aria-selected={exec.id === activeId ? "true" : "false"}
             tabindex={exec.id === activeId ? 0 : -1}
           >
             <span class="roster-item__dot" aria-hidden="true" />
             <span class="roster-item__text">
-              <span class="roster-item__name">{exec.name}</span>
-              <span class="roster-item__role">{exec.role}</span>
+              <span class="roster-item__name">
+                <span class="roster-item__name-full">{exec.name}</span>
+                <span class="roster-item__name-short">{firstName(exec.name)}</span>
+              </span>
+              <span class="roster-item__role">
+                <span class="roster-item__role-full">{exec.role}</span>
+                <span class="roster-item__role-short">{shortRole(exec.role)}</span>
+              </span>
             </span>
           </button>
         </li>
@@ -37,8 +58,33 @@ const { execs, activeId } = Astro.props;
 </nav>
 
 <style>
+  .team-roster {
+    position: sticky;
+    top: 4.25rem;
+    z-index: 20;
+    margin-inline: calc(-1 * clamp(0.75rem, 4vw, 0px));
+    padding: 0.65rem 0 0.75rem;
+    background: linear-gradient(
+      180deg,
+      rgba(5, 5, 5, 0.92) 0%,
+      rgba(5, 5, 5, 0.82) 70%,
+      rgba(5, 5, 5, 0) 100%
+    );
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+  }
+
+  .team-roster__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-inline: clamp(0.75rem, 4vw, 0);
+    margin-bottom: 0.55rem;
+  }
+
   .team-roster__label {
-    margin: 0 0 0.75rem;
+    margin: 0;
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -46,43 +92,59 @@ const { execs, activeId } = Astro.props;
     color: var(--mercury-dim);
   }
 
+  .team-roster__hint {
+    margin: 0;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mercury-dim);
+    opacity: 0.75;
+  }
+
   .team-roster__list {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0.15rem clamp(0.75rem, 4vw, 0) 0.35rem;
     display: flex;
     gap: 0.45rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding-bottom: 0.25rem;
+    scroll-padding-inline: clamp(0.75rem, 4vw, 0);
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    mask-image: linear-gradient(90deg, #000 0%, #000 88%, transparent 100%);
+  }
+
+  .team-roster__list::-webkit-scrollbar {
+    display: none;
   }
 
   .roster-item {
     display: flex;
-    align-items: flex-start;
-    gap: 0.65rem;
-    width: max-content;
-    min-width: 11.5rem;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 0 0 auto;
+    min-width: 0;
+    min-height: 2.75rem;
     scroll-snap-align: start;
     text-align: left;
     margin: 0;
-    padding: 0.75rem 0.85rem;
-    border-radius: 0.45rem;
-    border: 1px solid transparent;
-    background: transparent;
+    padding: 0.55rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid rgba(232, 234, 237, 0.14);
+    background: rgba(200, 204, 210, 0.05);
     color: inherit;
     font: inherit;
     cursor: pointer;
     transition:
       background-color 160ms ease,
-      border-color 160ms ease;
+      border-color 160ms ease,
+      box-shadow 160ms ease;
   }
 
   .roster-item__dot {
-    width: 0.4rem;
-    height: 0.4rem;
-    margin-top: 0.4rem;
+    width: 0.35rem;
+    height: 0.35rem;
     border-radius: 999px;
     background: var(--mercury-dim);
     flex-shrink: 0;
@@ -90,27 +152,36 @@ const { execs, activeId } = Astro.props;
 
   .roster-item__text {
     display: grid;
-    gap: 0.15rem;
+    gap: 0.1rem;
     min-width: 0;
   }
 
   .roster-item__name {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     font-weight: 500;
     color: var(--mercury-bright);
+    line-height: 1.15;
+  }
+
+  .roster-item__name-full,
+  .roster-item__role-full {
+    display: none;
   }
 
   .roster-item__role {
-    font-size: 0.78rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
-    line-height: 1.3;
+    line-height: 1.2;
+    white-space: nowrap;
   }
 
   .roster-item.is-active,
   .roster-item[aria-selected="true"] {
-    background: rgba(200, 204, 210, 0.07);
-    border-color: rgba(232, 234, 237, 0.22);
-    box-shadow: inset 2px 0 0 0 var(--mercury);
+    background: rgba(200, 204, 210, 0.14);
+    border-color: rgba(232, 234, 237, 0.34);
+    box-shadow:
+      inset 0 1px 0 rgba(232, 234, 237, 0.16),
+      0 0 0 1px rgba(200, 204, 210, 0.06);
   }
 
   .roster-item.is-active .roster-item__dot,
@@ -119,17 +190,24 @@ const { execs, activeId } = Astro.props;
     box-shadow: 0 0 10px rgba(232, 234, 237, 0.35);
   }
 
-  .roster-item.is-active .roster-item__name {
-    background-image: linear-gradient(90deg, transparent, var(--mercury-bright) 20%, transparent);
-    background-size: 100% 1px;
-    background-repeat: no-repeat;
-    background-position: 0 100%;
-  }
-
   @media (min-width: 960px) {
     .team-roster {
       position: sticky;
       top: 5.5rem;
+      margin-inline: 0;
+      padding: 0;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .team-roster__head {
+      padding-inline: 0;
+      margin-bottom: 0.75rem;
+    }
+
+    .team-roster__hint {
+      display: none;
     }
 
     .team-roster__list {
@@ -137,11 +215,47 @@ const { execs, activeId } = Astro.props;
       overflow: visible;
       scroll-snap-type: none;
       gap: 0.35rem;
+      padding: 0;
+      mask-image: none;
     }
 
     .roster-item {
       width: 100%;
-      min-width: 0;
+      border-radius: 0.45rem;
+      align-items: flex-start;
+      padding: 0.75rem 0.85rem;
+      background: transparent;
+      border-color: transparent;
+    }
+
+    .roster-item__dot {
+      margin-top: 0.35rem;
+    }
+
+    .roster-item__name-short,
+    .roster-item__role-short {
+      display: none;
+    }
+
+    .roster-item__name-full,
+    .roster-item__role-full {
+      display: inline;
+    }
+
+    .roster-item__name {
+      font-size: 0.95rem;
+    }
+
+    .roster-item__role {
+      font-size: 0.78rem;
+      white-space: normal;
+    }
+
+    .roster-item.is-active,
+    .roster-item[aria-selected="true"] {
+      background: rgba(200, 204, 210, 0.07);
+      border-color: rgba(232, 234, 237, 0.22);
+      box-shadow: inset 2px 0 0 0 var(--mercury);
     }
   }
 
