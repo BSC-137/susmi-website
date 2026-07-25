@@ -24,6 +24,8 @@ const { href, name } = Astro.props;
 
 <style>
   .linkedin-mark {
+    position: relative;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -31,30 +33,91 @@ const { href, name } = Astro.props;
     height: 2.75rem;
     min-width: 44px;
     min-height: 44px;
-    border-radius: 0.4rem;
-    border: 1px solid var(--glass-border);
-    background: rgba(200, 204, 210, 0.06);
+    border-radius: 0.45rem;
+    border: 1px solid rgba(232, 234, 237, 0.22);
+    background: linear-gradient(
+      155deg,
+      rgba(232, 234, 237, 0.12) 0%,
+      rgba(200, 204, 210, 0.06) 100%
+    );
     color: var(--mercury);
+    box-shadow:
+      inset 0 1px 0 rgba(232, 234, 237, 0.18),
+      0 8px 18px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
     transition:
-      color 160ms ease,
-      border-color 160ms ease,
-      background-color 160ms ease;
+      color 180ms ease,
+      border-color 180ms ease,
+      background 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .linkedin-mark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      105deg,
+      transparent 25%,
+      rgba(232, 234, 237, 0.28) 50%,
+      transparent 75%
+    );
+    background-size: 220% 100%;
+    background-position: 130% 0;
+    opacity: 0;
   }
 
   .linkedin-mark:hover {
     color: var(--mercury-bright);
-    border-color: rgba(232, 234, 237, 0.32);
-    background: rgba(200, 204, 210, 0.12);
+    border-color: rgba(232, 234, 237, 0.4);
+    background: linear-gradient(
+      155deg,
+      rgba(232, 234, 237, 0.18) 0%,
+      rgba(200, 204, 210, 0.1) 100%
+    );
+    transform: translateY(-1px);
+    box-shadow:
+      inset 0 1px 0 rgba(232, 234, 237, 0.28),
+      0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .linkedin-mark:hover::before {
+    opacity: 1;
+    animation: linkedin-sweep 600ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .linkedin-mark__icon {
+    position: relative;
+    z-index: 1;
     width: 1.35rem;
     height: 1.35rem;
   }
 
+  @keyframes linkedin-sweep {
+    from {
+      background-position: 130% 0;
+    }
+    to {
+      background-position: -30% 0;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .linkedin-mark {
+    .linkedin-mark,
+    .linkedin-mark::before {
       transition: none;
+      animation: none;
+    }
+
+    .linkedin-mark:hover {
+      transform: none;
+    }
+
+    .linkedin-mark:hover::before {
+      opacity: 0;
     }
   }
 </style>
